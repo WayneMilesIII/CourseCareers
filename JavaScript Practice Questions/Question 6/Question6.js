@@ -3,25 +3,30 @@
 
 function friends(people) 
 {
-    for (const person in people) {
-        for (const otherPerson in people) {
-            if (person !== otherPerson) {
-                if (people[otherPerson].friends.includes(people[person].name)) {
-                    if (!people[person].loyalFriendsCount) {
-                        people[person].loyalFriendsCount = 0;
-                    }
-                    people[person].loyalFriendsCount++;
-                }
-            }
-        }
+
+
+    for (let i = 0; i < people.length; i++) 
+    {
+        console.log(people[i].name.name);
     }
 }
 
-const people = {
-    name: "Tim", friends: ['John', 'Sally'],
-    name: "John", friends: ['Tim', 'Mike'],
-    name: "Mike", friends: [],
-    name: "Sally", friends: ['Tim']
-}
+// Each person has a name and a list of friends
+// Will this create new objects for each person when there are duplicate names?
+const people = [
+    {name: "Tim", friends:[{name: "John"}, {name: "Mike"}]},
+    {name: "John", friends:[{name: "Tim"}, {name: "Sally"}]},
+    {name: "Mike", friends: [{name: ""}]},
+    {name: "Sally",friends: [{name: "Tim"}]} 
+]
 
-friends(people); // should return { Tim: 2, John: 1, Mike: 0, Sally: 1 }
+friends(people);
+
+/*  If a person is also a friend of another person, they are considered a loyal friend.
+    For example, Tim has two friends: John and Mike.
+    John considers Tim a friend back, but Mike does not.
+    Therefore, Tim has one loyal friend: John.
+
+    The function should return an object with the number of loyal friends for each person.  
+*/
+//console.log(friends(people)); // should return { Tim: 2, John: 1, Mike: 0, Sally: 1 }
