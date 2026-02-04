@@ -4,20 +4,27 @@ function appendNumber(number) {
 }   
 function setOperation(operator) {
     const display = document.getElementById('display');
-    display.value += operator;
+    display.textContent += operator;
 }
 function clearDisplay() {
     const display = document.getElementById('display');
-    display.value = '';
+    display.textContent = '';
 }
 function calculateResult() {
     const display = document.getElementById('display');
+    const expression = display.textContent;
+
+    // Study the difference between eval and Function constructor
+
     try {
-        const result = eval(display.value);
-        display.value = result;
+        // Using Function constructor to evaluate the expression safely
+        const result = new Function('return ' + expression)();
+        display.textContent = result;
     } catch (error) {
-        display.value = 'Error';
-    }   
+        display.textContent = 'Error';
+    }
+    // calculate the result by taking the expression from the display
+    // without using eval for security reasons
 }
 function appendDecimal() {
     const display = document.getElementById('display');
